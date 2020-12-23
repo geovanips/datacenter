@@ -1,0 +1,16 @@
+[mysql]
+192.168.1.70
+[mysql:vars]
+ansible_user=vagrant
+ansible_ssh_private_key_file=/home/vagrant/id_rsa
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+
+[apache]
+192.168.1.72
+[apache:vars]
+ansible_user=vagrant
+ansible_ssh_private_key_file=/home/vagrant/id_rsa
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
