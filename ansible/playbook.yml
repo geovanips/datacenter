@@ -1,0 +1,28 @@
+---
+- name: Criando servidor apache
+  hosts: apache
+  become: true
+  vars:
+    doc_root: /var/www/example
+  tasks:
+  - name: Update apt
+    apt: update_cache=yes
+  - name: Instalando Apache
+    apt: name=apache2 state=latest
+  - name: Criando um documento root
+    file: path={{ doc_root }} state=directory owner=www-data group=www-data
+    notify: restart apache
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+- name: Criando servidor de banco
+  hosts: mysql
+  become: true
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes
+    - name: instalar mysql
+      apt: name=mariadb-server state=latest
+    - name: Habilitar mysql no boot
+      service: name=mariadb state=started enabled=yes
+...
